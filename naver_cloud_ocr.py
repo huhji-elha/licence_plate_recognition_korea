@@ -2,7 +2,7 @@ import json
 import base64
 import requests
 
-with open("test_image/car_snow.jpg", 'rb') as f :
+with open("path to image", 'rb') as f :
     img = base64.b64encode(f.read())
 
 URL = "APIGW Invoke URL"
