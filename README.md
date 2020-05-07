@@ -32,3 +32,11 @@ from Darknet, get pretrained YOLO v3 model and weights
 
 
 ![](Images/video_output_sample.gif)
+
+-----------------------------------------------------------------------------
+
+### Clear Issues
+* Opencv(Yolo) + Pillow(한글 출력) 동시 사용 : Licence_Plate_detection.py
+    * opencv로는 이미지 위에 한글 출력이 안됨. 그래서 PIL을 사용해야하는데 python 으로 opencv+pillow 결과롤 함께 출력하는 코드를 못찾아서 직접 짬.
+    * 더 깔끔한 코드와 프로세스를 위해 연구중임.
+* OCR API가 표지판 글자에는 저조한 인식률을 보임. 추가 학습 준비중.
