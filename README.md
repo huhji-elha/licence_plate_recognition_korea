@@ -1,4 +1,4 @@
-## Licence-Plate-Recognition for Surrovision
+## Licence-Plate-Recognition
 
 ### Licence Plate Detection with YOLO
 
@@ -18,4 +18,15 @@ from Darknet, get pretrained YOLO v3 model and weights
 * wild한 환경의 인식을 위해선 추가학습이 필요
 
 * google과 naver 각 개인 보안 API KEY를 발급받아 사용 가능
+
+----------------------------------------------------------------------------
+
+### Licence Plate Detection with YOLO + Recognition with GoogleAPI
+#### Image version
+
+
+![image_output](sample01.jpg)
+
+
+#### Video version
 
