@@ -1,3 +1,4 @@
+## opencv + PIL 연습 코드
 
 import cv2 as cv
 import argparse
@@ -48,4 +49,4 @@ draw.text((10, 10),  recoq[0], font=font, fill=(b,g,r,a))
 img = np.array(img_pil)
 #cv.putText(img,  "", (10,10), cv.FONT_HERSHEY_SIMPLEX, 0.5, (b,g,r), 1, cv.LINE_AA)
 
-cv.imwrite("/home/huhji/licence_plate/output_sample.jpg", img)
+cv.imwrite("path to output folder/output.jpg", img)
