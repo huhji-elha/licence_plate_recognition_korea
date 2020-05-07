@@ -14,30 +14,6 @@ parser.add_argument('--image', help='Path to image file.')
 parser.add_argument('--video', help='Path to video file.')
 args = parser.parse_args()
 
-# # Process inputs
-# winName = 'Deep learning object detection in OpenCV'
-# cv.namedWindow(winName, cv.WINDOW_NORMAL)
-
-# outputFile = "yolo_out_py.avi"
-# if (args.image):
-#     # Open the image file
-#     if not os.path.isfile(args.image):
-#         print("Input image file ", args.image, " doesn't exist")
-#         sys.exit(1)
-#     cap = cv.VideoCapture(args.image)
-#     outputFile = args.image[:-4]+'_yolo_out_py.jpg'
-# elif (args.video):
-#     # Open the video file
-#     if not os.path.isfile(args.video):
-#         print("Input video file ", args.video, " doesn't exist")
-#         sys.exit(1)
-#     cap = cv.VideoCapture(args.video)
-#     outputFile = args.video[:-4]+'_yolo_out_py2.avi'
-# else:
-#     # Webcam input
-#     cap = cv.VideoCapture(0)
-
-
 def detect_text(path):
     from google.cloud import vision
     client = vision.ImageAnnotatorClient()
@@ -61,12 +37,10 @@ recoq = []
 for text in api_output :
     recoq.append(text.description)
 
-print(recoq[0])
-
 img = cv.imread(args.image, cv.IMREAD_COLOR)
 #print(type(img))
 b,g,r,a = 0,0,255,0
-fontpath = "/home/huhji/.local/share/fonts/NanumGothic.ttf"
+fontpath = "/font path to/NanumGothic.ttf"
 font = ImageFont.truetype(fontpath, 80)
 img_pil = Image.fromarray(img)
 draw = ImageDraw.Draw(img_pil)
