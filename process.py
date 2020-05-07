@@ -30,7 +30,6 @@ def detect_text(path):
     texts = response.text_annotations
     return texts, content
 
-#image = "/home/huhji/licence_plate/test_image/car_big_LP_04.jpeg"
 api_output, _ = detect_text(args.image)
 
 recoq = []
