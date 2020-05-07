@@ -31,4 +31,4 @@ from Darknet, get pretrained YOLO v3 model and weights
 #### Video version
 
 
-![video_output](Images/video_output_saple.gif)
+![](Images/video_output_sample.gif)
