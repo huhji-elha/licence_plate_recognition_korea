@@ -11,7 +11,7 @@ import re
 # 한글 출력
 from PIL import ImageFont, ImageDraw, Image
 
-fontpath = "/home/huhji/.local/share/fonts/NanumGothic.ttf"
+fontpath = "/font_path_to/NanumGothic.ttf"
 font = ImageFont.truetype(fontpath, 80)
 
 
@@ -53,7 +53,7 @@ def detect_text(frame):
     import base64
     client = vision.ImageAnnotatorClient()
 
-    path = "/home/huhji/licence_plate/video_captioned.jpg"
+    path = "/Images/video_captioned.jpg"
     cv.imwrite(path,frame)
     with io.open(path, 'rb') as image_file:
         content = image_file.read()
@@ -78,20 +78,6 @@ def drawPred(classId, conf, left, top, right, bottom):
     # Draw a bounding box.
     #    cv.rectangle(frame, (left, top), (right, bottom), (255, 178, 50), 3)
     cv.rectangle(img, (left, top), (right, bottom), (0, 255, 0), 3)
-
-    # api_output = detect_text(args.image)
-    # recoq = []
-    # for text in api_output :
-    #     recoq.append(text.description)
-
-    # print(recoq)
-    #b,g,r,a = 255,255,255,0
-    # img_pil = Image.fromarray(frame)
-    #draw = ImageDraw.Draw(Image.fromarray(frame))
-    #draw.text((10, 10),  recoq[0], font=font, fill=(b,g,r,a))
-
-    #img = np.array(img_pil)
-
     label = '%.2f' % conf
 
     # Get the label for the class name and its confidence
@@ -105,15 +91,12 @@ def drawPred(classId, conf, left, top, right, bottom):
     top = max(top, labelSize[1])
     cv.rectangle(img, (left, top - round(1.5*labelSize[1])+1), (left + round(
         1.5*labelSize[0]), top + baseLine), (255, 0, 255), cv.FILLED)
-    #cv.rectangle(frame, (left, top - round(1.5*labelSize[1])), (left + round(1.5*labelSize[0]), top + baseLine),    (255, 255, 255), cv.FILLED)
     cv.putText(img, label, (left, top),
                cv.FONT_HERSHEY_SIMPLEX, 0.70, (255, 255, 255), 2)
     return img
-    #cv.imwrite("/home/huhji/licence_plate/sample01.jpg", img)
 
 
 # Remove the bounding boxes with low confidence using non-maxima suppression
-
 def postprocess(frame, outs):
     frameHeight = frame.shape[0]
     frameWidth = frame.shape[1]
@@ -194,7 +177,7 @@ if (not args.image):
         cap.get(cv.CAP_PROP_FRAME_WIDTH)), round(cap.get(cv.CAP_PROP_FRAME_HEIGHT))))
 
 
-### 비디오 캡셔닝 ###
+### VIDEO CAPTIONING  ###
 labels = []
 while cv.waitKey(1) < 0:
 
@@ -217,13 +200,14 @@ while cv.waitKey(1) < 0:
 
     # Runs the forward pass to get output of the output layers
     outs = net.forward(getOutputsNames(net))
-    ### 시도01
+    # add detected text on recoq list
     api_output = detect_text(frame)
     recoq = []
     for text in api_output :
         recoq.append(text.description)
     # print(recoq[0])
 
+    # find LP feature on detected texts
     pattern = "[0-9]{2}[가-힣]\s[0-9]{4}"
     pattern2 = "[0-9]{4}"
     match_pattern = re.search(pattern, recoq[0])
@@ -235,8 +219,6 @@ while cv.waitKey(1) < 0:
         label = " none "
     else :
         label = labels[-1]
-    # print("searched : ",label)
-    #label = match_pattern.group()
 
     b,g,r,a = 0,0,0,0
     img_pil = Image.fromarray(frame)
@@ -248,12 +230,11 @@ while cv.waitKey(1) < 0:
     # Remove the bounding boxes with low confidence
     img = postprocess(img, outs)
  
-    cv.imwrite("/home/huhji/licence_plate/sample02.jpg", img)
+    cv.imwrite("img_output.jpg", img)
 
     # Put efficiency information. The function getPerfProfile returns the overall time for inference(t) and the timings for each of the layers(in layersTimes)
     t, _ = net.getPerfProfile()
     label = 'Inference time: %.2f ms' % (t * 1000.0 / cv.getTickFrequency())
-    #cv.putText(frame, label, (0, 15), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255))
     # Write the frame with the detection boxes
     if (args.image):
         cv.imwrite(outputFile, np_img.astype(np.uint8))
