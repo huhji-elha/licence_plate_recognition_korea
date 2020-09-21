@@ -2,9 +2,11 @@
 
 ### Licence Plate Detection with YOLO
 
+* reference from : [alitourani's yolo-license-plate-detection](https://github.com/alitourani/yolo-license-plate-detection)
+
 from Darknet, get pretrained YOLO v3 model and weights
 
-    python object_detection_yolo.py --image test_image/car_snow.jpg
+    python Licence_Plate_detection.py --image test_image/car_snow.jpg
 
 * detection된 번호판이 crop되도록 코드수정
 * 동영상 input용 코드 추후 업데이트 예정
@@ -18,6 +20,8 @@ from Darknet, get pretrained YOLO v3 model and weights
 * wild한 환경의 인식을 위해선 추가학습이 필요
 
 * google과 naver 각 개인 보안 API KEY를 발급받아 사용 가능
+* model.weights는 용량 문제로 올리지 못함. [link](https://drive.google.com/file/d/1vXjIoRWY0aIpYfhj3TnPUGdmJoHnWaOc/edit) 여기에서 다운로드 가능
+
 
 ----------------------------------------------------------------------------
 
